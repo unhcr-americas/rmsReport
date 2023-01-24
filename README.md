@@ -1,2 +1,63 @@
-# rms-report
-A template for the RMS report with some utilities
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+# `{rmsReport}`
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+The goal of `{rmsReport}` is to provide a template for the standard
+RESULTS MONITORING SURVEY Data Collection REPORT.
+
+The main objectives is to avoid duplication of information between the
+report and the information that is already expected to be gathered and
+recorded within [UNHCR Internal Data Repository](http://ridl.unhcr.org).
+RIDL already follow the international standard for metadata. Namely
+[Data Documentation Initiative](https://ddialliance.org/).
+
+The report pulls data using the API with the [`{riddle}`]() package and
+use both [`{unhcrdown}`]() and [`{unhcrtheme}`]() to prepopulate the
+report
+
+## Installation and token authentication
+
+You can install the development version of `{rmsReport}` from
+[GitHub](https://github.com/) with:
+
+``` r
+# install.packages("pak")
+pak::pkg_install("edouard-legoupil/riddle")
+pak::pkg_install("unhcr-americas/rmsReport")
+```
+
+The `{riddle}` package is used to ensure integration with UNHCR Data
+Repository\](<https://ridl.unhcr.org>). It requires you to add your
+**API token** and store it for further use. The easiest way to do that
+is to store your API token in your `.Renviron` file which is
+automatically read by R on startup.
+
+You can retrieve your `API TOKEN` in your [user
+page](https://ridl.unhcr.org/user/).
+
+![api_token_img](https://raw.githubusercontent.com/Edouard-Legoupil/riddle/main/inst/token.png)
+
+To use the package, you’ll need to store your RIDL API token in the
+`RIDL_API_TOKEN` environment variable. The easiest way to do that is by
+calling `usethis::edit_r_environ()` and adding the line
+`RIDL_API_TOKEN=xxxxx` to the file before saving and restarting your R
+session.
+
+## Example
+
+To build your report, File \> New File \> Rmarkdown \> from template \>
+rmsReport.
+
+You will need to document a few parameters for the report:
+
+- ridl this is the canonical name for the dataset in RIDL
+- title
+
+Alternatively you can use the following functions
+
+``` r
+```

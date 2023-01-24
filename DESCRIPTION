@@ -1,14 +1,33 @@
 Package: rmsReport
-Version: 0.0.0.9000
 Title: Generate RMS Report
-Description: Use Rmarkdown template to pull the data from RIDL and organise the content for a summary RMS report.
-Authors@R: c(person(given = "Edouard",
-         family = "Legoupil",
-         role = c("aut", "cre"),
-         email = "legoupil@unhcr.org"),
-  person(given = "TUNHCR",
-         role = "cph"))
+Version: 0.0.0.9000
+Authors@R: c(
+    person("Edouard", "Legoupil", , "legoupil@unhcr.org", role = c("aut", "cre")),
+    person("TUNHCR", role = "cph")
+  )
+Description: Use Rmarkdown template to pull the data from RIDL and
+    organise the content for a summary RMS report.
 License: MIT + file LICENSE
+Imports: 
+    dplyr,
+    ggplot2,
+    here,
+    httr,
+    janitor,
+    jsonlite,
+    magrittr,
+    openxlsx,
+    riddle,
+    rmarkdown,
+    stringr,
+    unhcrdatapackage,
+    unhcrdown,
+    unhcrthemes
+Suggests: 
+    knitr,
+    testthat
+VignetteBuilder: 
+    knitr
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3

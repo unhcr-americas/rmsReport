@@ -1,18 +1,269 @@
 ---
-title: "Template Title"
-author: "Your Name"
-date: "The Date"
-output: output_format
+title: "Result Monitoring Survey"
+subtitle: "Sub title"
+date: "`r format(Sys.Date(),  '%d %B %Y')`"
+author:
+  - name: Contact Name
+    affiliation: Job title
+    email: email@unhcr.org
+params:
+  datafolder: "data-raw"
+  data: "survey-xls-data__aks9zfiysus4w8ga4erbmx_data.xlsx" ## Name of the data file
+  form: "form_kobocruncher_RMS_ECU2022.xlsx" ## name of the xlsform
+  datasource: "RMS Ecuador Sept 2002" ## String used in caption for all your charts
+  ridl: "rms_v4" ## Name of the ridl project where you data is documented and archived
+  publish: "yes"
+  visibility: "public"
+  stage: "interpretation_prez"
+output:
+  unhcrdown::paged_simple:
+    back_html: true
+    toc: true
+    number_sections: false
+paged-footnotes: true
+links-to-footnotes: true
+# uncomment this line to produce HTML and PDF in RStudio:
+#knit: pagedown::chrome_print
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = FALSE,
+                      comment = "",
+                      warning = FALSE, 
+                      message = FALSE,
+                      fig.retina = 2,
+                      fig.showtext = TRUE,
+                      dev = "ragg_png",
+                      dpi = 300)
 ```
 
-## Adding an RMarkdown Template
 
-This file is what a user will see when they select your template. Make sure that you update the fields in the yaml header. In particular you will want to update the `output` field to whatever format your template requires.
+```{r getdata, include=FALSE}
+### pull ridl metadata
+p <- riddle::dataset_show(params$ridl)
+list_of_resources <- p[["resources"]][[1]]
 
-This is a good place to demonstrate special features that your template provides. Ideally it should knit out-of-the-box, or at least contain clear instructions as to what needs changing.
+```
 
-Finally, be sure to remove this message!
+
+
+#	I  Abstract
+
+`r p[["short_title" ]]`
+
+
+```{r}
+# datasetmetadata
+# 
+#  [1] "admin_notes"                
+#  [2] "archived"                   
+#  [3] "author"                     
+#  [4] "author_email"               
+#  [5] "clean_ops_notes"            
+#  [6] "creator_user_id"            
+#  [7] "data_accs_notes"            
+#  [8] "data_collection_notes"      
+#  [9] "data_collection_technique"  
+# [10] "data_collector"             
+# [11] "data_sensitivity"           
+# [12] "date_range_end"             
+# [13] "date_range_start"           
+# [14] "external_access_level"      
+# [15] "geog_coverage"              
+# [16] "geographies"                
+# [17] "id"                         
+# [18] "identifiability"            
+# [19] "isopen"                     
+# [20] "keywords"                   
+# [21] "kobo_asset_id"              
+# [22] "license_id"                 
+# [23] "license_title"              
+# [24] "maintainer"                 
+# [25] "maintainer_email"           
+# [26] "metadata_created"           
+# [27] "metadata_modified"          
+# [28] "name"                       
+# [29] "notes"                      
+# [30] "num_resources"              
+# [31] "num_tags"                   
+# [32] "operational_purpose_of_data"
+# [33] "organization"               
+# [34] "original_id"                
+# [35] "owner_org"                  
+# [36] "private"                    
+# [37] "process_status"             
+# [38] "response_rate_notes"        
+# [39] "sampling_procedure"         
+# [40] "sampling_procedure_notes"   
+# [41] "short_title"                
+# [42] "state"                      
+# [43] "title"                      
+# [44] "type"                       
+# [45] "unit_of_measurement"        
+# [46] "url"                        
+# [47] "version"                    
+# [48] "visibility"                 
+# [49] "weight_notes"               
+# [50] "resources"                  
+# [51] "tags"                       
+# [52] "groups"                     
+# [53] "relationships_as_subject"   
+# [54] "relationships_as_object" 
+# 
+# 
+# 
+# ressources_metdata
+#  [5] "description"        
+#  [6] "file_type"          
+#  [7] "format"   
+# [12] "last_modified"      
+# [13] "metadata_modified" 
+# [16] "name"           
+# [19] "resource_type"     
+# [22] "type"         
+# [23] "url"              
+# [25] "visibility"         
+# [26] "date_range_end"     
+# [27] "date_range_start"   
+# [28] "identifiability"    
+# [29] "process_status"     
+# [30] "version"            
+# [31] "license_name"       
+# [32] "license_uri"        
+# [33] "original_url"       
+# [34] "script_dependencies"
+# [35] "script_field_name"  
+# [36] "script_instructions"
+# [37] "script_methods"     
+# [38] "script_software"    
+# [39] "script_zip_package" 
+# [40] "source_code_repo"   
+# [41] "authors"  
+```
+
+
+
+#	II - Introduction
+
+##	a. Overview of RMS 
+
+###	PoCs surveyed
+
+Data Operational purpose is `r p[["operational_purpose_of_data"]]`
+
+###	Geographic coverage
+
+The covered area is `r p[["geographies"]]` and coverage is `r p[["geog_coverage"]]`
+
+
+##	b.PoC situation 
+
+
+#	III - Methodology and Limitations
+
+## a- 	Methods
+
+###	Survey design
+
+Unit of measurement for the study is `r p[["unit_of_measurement" ]]`.
+
+ 
+
+
+###	Sample design
+
+`r p[["admin_notes"]]`
+
+####	Sampling procedures 
+
+The sampling procedure was based on `r p[["sampling_procedure"]]`. `r p[["sampling_procedure_notes" ]]`
+
+####	Response rate
+
+`r p[["response_rate_notes"]]` 
+
+####	Weighting 
+
+`r p[["weight_notes"]]`
+
+
+###	Questionnaire topics and indicators
+```{r}
+cat(paste0(as.character(p[["keywords"]])))
+```
+
+
+###	Ethical approval
+
+Data identifiability level is `r p[[ "identifiability"]]` and access to data is governed by the following: `r p[[ "data_accs_notes" ]]`
+
+
+###	Field procedures
+
+####	Data collection period
+
+
+Data Collection started on `r p[["date_range_start" ]]` and ended on `r p[["date_range_end"  ]]`
+
+####	Data collection model 
+
+`r p[["data_collection_technique"]]`
+
+
+####	Field team management structure 
+
+`r p[["data_collection_notes" ]]`
+
+####	Data quality checks 
+
+###	Data processing and analysis
+
+####	Data cleaning
+
+
+`r p[["clean_ops_notes"]]`
+
+####	Draft indicator calculations 
+
+
+```{r}  
+ # list_of_resources    
+# [34] "script_dependencies"
+# [35] "script_field_name"  
+# [36] "script_instructions"
+# [37] "script_methods"     
+# [38] "script_software"    
+# [39] "script_zip_package" 
+# [40] "source_code_repo"   
+#cat(paste0(as.character(p[["clean_ops_notes"]]))) 
+```
+
+## b-	Data limitations and fieldwork challenges
+
+`r as.character(p[["notes"]])`
+
+# IV -	Findings 
+
+##	a- Characteristics of the survey PoC populations
+
+##	b-	Indicator Findings 
+
+###		Mobility and registration
+###		Disability
+###		Energy sources, WASH, and Dwelling
+###		Social protection, health access, and education
+###		Banking, unemployment, and income
+###		Safety and GBV
+###		Education, health access and vaccination
+
+
+## c-	Any additional analysis 
+
+As the partner has carried out as per your contract / PPA ToR
+
+#	V - Conclusions and Recommendations
+
+#	References 
+
+# Annexes
+

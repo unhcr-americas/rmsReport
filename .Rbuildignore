@@ -1,3 +1,7 @@
 
 ^dev$
 ^LICENSE\.md$
+^README\.Rmd$
+^CODE_OF_CONDUCT\.md$
+^rmsReport\.Rproj$
+^\.Rproj\.user$
